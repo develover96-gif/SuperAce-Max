@@ -1,0 +1,8 @@
+{
+  "name": "Remix Golden Empire - Slot Game",
+  "description": "A 6-reel dynamic-ways cascading slot game inspired by Golden Empire featuring ancient Aztec temples, Gold Frame Wild conversions, cascading multipliers, free spins, and mystery jackpots.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
