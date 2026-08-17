@@ -60,7 +60,7 @@ export const TournamentTicker: React.FC<TournamentTickerProps> = ({
             animate={{ scale: 1 }}
             className="font-mono text-[12px] font-black text-yellow-300 tracking-tight drop-shadow-[0_1px_4px_rgba(234,179,8,0.7)]"
           >
-            ${jackpotValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            ৳{jackpotValue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </motion.span>
           <span className="text-[9px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold hidden xs:inline">
             +2.5% Bets
@@ -92,7 +92,7 @@ export const TournamentTicker: React.FC<TournamentTickerProps> = ({
             {tournament.playerScore.toLocaleString()} pts
           </span>
           <span className="text-[9.5px] text-emerald-400 font-mono font-bold">
-            ${tournament.firstPrize.toLocaleString()} Top
+            ৳{tournament.firstPrize.toLocaleString()} Top
           </span>
           <ChevronRight className="w-3 h-3 text-zinc-400 group-hover:text-white transition-colors" />
         </div>

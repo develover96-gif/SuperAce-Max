@@ -114,12 +114,12 @@ export const VaultCoinFlyingCanvas: React.FC<VaultCoinFlyingCanvasProps> = ({
         ctx.lineWidth = 1.2;
         ctx.stroke();
 
-        // Dollar sign relief
+        // Taka sign relief
         ctx.fillStyle = '#713f12';
         ctx.font = `bold ${Math.round(coin.radius * 1.1)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('$', 0, 1);
+        ctx.fillText('৳', 0, 1);
 
         ctx.restore();
       }

@@ -73,11 +73,11 @@ export const WithdrawalInterceptModal: React.FC<WithdrawalInterceptModalProps> =
           </div>
 
           <div className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-300 font-mono tracking-tight my-1">
-            +${matchAmount.toFixed(2)} FREE BONUS
+            +৳{matchAmount.toFixed(2)} FREE BONUS
           </div>
 
           <div className="text-xs text-zinc-400">
-            Total Playable Balance: <span className="font-bold text-white">${totalPlayBalance.toFixed(2)}</span>
+            Total Playable Balance: <span className="font-bold text-white">৳{totalPlayBalance.toFixed(2)}</span>
           </div>
 
           <div className="mt-2.5 grid grid-cols-2 gap-2 w-full text-left text-[11px]">
@@ -99,14 +99,14 @@ export const WithdrawalInterceptModal: React.FC<WithdrawalInterceptModalProps> =
             className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:brightness-110 text-stone-950 font-black uppercase text-sm tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(16,185,129,0.6)] cursor-pointer transition-all active:scale-[0.98]"
           >
             <Sparkles className="w-4 h-4 text-stone-950" />
-            <span>Claim +${matchAmount.toFixed(2)} & Continue Playing</span>
+            <span>Claim +৳{matchAmount.toFixed(2)} & Continue Playing</span>
           </button>
 
           <button
             onClick={onConfirmWithdrawal}
             className="w-full py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-zinc-200 font-semibold text-xs tracking-wider border border-white/10 cursor-pointer transition-all"
           >
-            Proceed with Standard Withdrawal (${withdrawalAmount.toFixed(2)})
+            Proceed with Standard Withdrawal (৳{withdrawalAmount.toFixed(2)})
           </button>
         </div>
       </motion.div>

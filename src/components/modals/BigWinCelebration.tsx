@@ -116,7 +116,7 @@ export const BigWinCelebration: React.FC<BigWinCelebrationProps> = ({
           transition={{ repeat: Infinity, duration: 1.2 }}
           className="font-['MStiffHei_PRC_UltraBold'] font-black text-4xl sm:text-5xl text-white tabular-nums tracking-wider mt-2 filter drop-shadow-[0_2px_15px_rgba(246,176,26,0.8)]"
         >
-          ${displayedAmount.toFixed(2)}
+          ৳{displayedAmount.toFixed(2)}
         </motion.div>
 
         <span className="text-xs font-bold text-[#f6d478] tracking-widest uppercase mt-4 animate-pulse">

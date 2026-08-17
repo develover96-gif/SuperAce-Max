@@ -81,7 +81,7 @@ export const FooterBar: React.FC<FooterBarProps> = ({
                   : 'text-white group-hover:text-[#f6b01a]'
               }`}
             >
-              ${safeBalance.toFixed(2)}
+              ৳{safeBalance.toFixed(2)}
             </span>
             <PlusCircle className="w-3.5 h-3.5 text-[#2ecc71] opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
@@ -96,7 +96,7 @@ export const FooterBar: React.FC<FooterBarProps> = ({
                 transition={{ duration: 0.9, ease: 'easeOut' }}
                 className="absolute -top-3 left-1/2 -translate-x-1/2 pointer-events-none z-50 whitespace-nowrap px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-600 text-black text-[11px] font-black shadow-[0_0_14px_rgba(245,158,11,0.9)] border border-yellow-200"
               >
-                +${safeWin.toFixed(2)}
+                +৳{safeWin.toFixed(2)}
               </motion.div>
             )}
           </AnimatePresence>
@@ -111,7 +111,7 @@ export const FooterBar: React.FC<FooterBarProps> = ({
           <div className="flex flex-col items-start leading-none">
             <span className="text-[6px] text-amber-500 font-bold uppercase tracking-tighter">Jackpot</span>
             <span className="font-mono text-[9px] font-black text-yellow-300">
-              ${jackpotValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+              ৳{jackpotValue.toLocaleString('en-US', { maximumFractionDigits: 0 })}
             </span>
           </div>
         </button>

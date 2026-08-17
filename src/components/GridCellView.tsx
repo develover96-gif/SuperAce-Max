@@ -36,7 +36,7 @@ export const GridCellView: React.FC<GridCellViewProps> = ({ cell, isSpinning, ga
   if (isScatter) {
     cardBgClass = 'card-scatter';
   } else if (isJoker) {
-    cardBgClass = 'bg-gradient-to-b from-[#2a0818] via-[#500724] to-[#16020b] shadow-[0_0_15px_rgba(244,114,182,0.6),inset_0_0_10px_rgba(236,72,153,0.5)]';
+    cardBgClass = 'bg-gradient-to-b from-[#2a0818] via-[#500724] to-[#16020b] shadow-[0_0_8px_rgba(244,114,182,0.3),inset_0_0_6px_rgba(236,72,153,0.25)]';
   } else if (isGoldenWild || isGoldenCard) {
     cardBgClass = 'card-gold';
   }
@@ -66,23 +66,23 @@ export const GridCellView: React.FC<GridCellViewProps> = ({ cell, isSpinning, ga
           initial={{ opacity: 0.9, scale: 0.6 }}
           animate={{ opacity: 0, scale: 1.4 }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
-          className="absolute -inset-1 rounded-lg border-2 border-cyan-300 bg-amber-300/20 pointer-events-none z-30 shadow-[0_0_14px_#00f0ff]"
+          className="absolute -inset-1 rounded-lg border-2 border-cyan-300 bg-amber-300/10 pointer-events-none z-30 shadow-[0_0_5px_#00f0ff]"
         />
       )}
 
       {/* Golden Card Pulsing Outer Border */}
       {isGoldenCard && !isJoker && (
-        <div className="absolute inset-0 pointer-events-none z-30 rounded-md shadow-[0_0_12px_rgba(250,204,21,0.9),inset_0_0_6px_rgba(254,240,138,0.7)] animate-gold-pulse" />
+        <div className="absolute inset-0 pointer-events-none z-30 rounded-md shadow-[0_0_5px_rgba(250,204,21,0.6),inset_0_0_3px_rgba(254,240,138,0.4)] animate-gold-pulse" />
       )}
 
       {/* Golden Joker Pulsing Neon Crimson / Gold Halo */}
       {isJoker && (
-        <div className="absolute inset-0 pointer-events-none z-30 rounded-md shadow-[0_0_16px_rgba(236,72,153,0.9),inset_0_0_8px_rgba(253,224,71,0.8)] animate-pulse" />
+        <div className="absolute inset-0 pointer-events-none z-30 rounded-md shadow-[0_0_7px_rgba(236,72,153,0.6),inset_0_0_4px_rgba(253,224,71,0.5)] animate-pulse" />
       )}
 
       {/* Expanded Golden Joker Wild Electric Aura */}
       {isExpandedWild && (
-        <div className="absolute -inset-0.5 pointer-events-none z-35 rounded-md bg-gradient-to-b from-pink-500/20 via-yellow-400/20 to-pink-500/20 shadow-[0_0_20px_#f43f5e] animate-pulse" />
+        <div className="absolute -inset-0.5 pointer-events-none z-35 rounded-md bg-gradient-to-b from-pink-500/5 via-yellow-400/5 to-pink-500/5 shadow-[0_0_9px_#f43f5e] animate-pulse" />
       )}
 
       {/* Winning Highlight Gold Ring Glow & Pop Halo */}
@@ -93,9 +93,9 @@ export const GridCellView: React.FC<GridCellViewProps> = ({ cell, isSpinning, ga
             animate={{
               opacity: [0.9, 1, 0.9],
               boxShadow: [
-                '0 0 14px rgba(254, 240, 138, 0.95), inset 0 0 10px rgba(246, 176, 26, 0.9)',
-                '0 0 24px rgba(254, 240, 138, 1), inset 0 0 14px rgba(246, 176, 26, 1)',
-                '0 0 14px rgba(254, 240, 138, 0.95), inset 0 0 10px rgba(246, 176, 26, 0.9)',
+                '0 0 6px rgba(254, 240, 138, 0.7), inset 0 0 4px rgba(246, 176, 26, 0.6)',
+                '0 0 12px rgba(254, 240, 138, 0.8), inset 0 0 8px rgba(246, 176, 26, 0.8)',
+                '0 0 6px rgba(254, 240, 138, 0.7), inset 0 0 4px rgba(246, 176, 26, 0.6)',
               ],
             }}
             transition={{ repeat: Infinity, duration: 0.95, ease: 'easeInOut' }}
@@ -114,8 +114,8 @@ export const GridCellView: React.FC<GridCellViewProps> = ({ cell, isSpinning, ga
           transition={{ duration: 0.45 }}
           className={`absolute inset-0 rounded-md pointer-events-none z-40 ${
             isJoker
-              ? 'bg-pink-300 shadow-[0_0_30px_#ec4899]'
-              : 'bg-yellow-200 shadow-[0_0_24px_#fde047]'
+              ? 'bg-pink-300 shadow-[0_0_15px_#ec4899]'
+              : 'bg-yellow-200 shadow-[0_0_12px_#fde047]'
           }`}
         />
       )}

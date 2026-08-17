@@ -112,7 +112,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <DollarSign className="w-5 h-5 text-[#2ecc71]" />
               <div>
                 <div className="text-xs font-bold text-white">Demo Balance</div>
-                <div className="text-[10px] text-[#aab]">Add $100 demo credits</div>
+                <div className="text-[10px] text-[#aab]">Add ৳100 demo credits</div>
               </div>
             </div>
 
@@ -120,7 +120,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               onClick={onTopUpBalance}
               className="px-3 py-1 rounded-lg bg-gradient-to-b from-[#ffe9a8] via-[#f2b83c] to-[#d07810] text-[#7a1000] font-black text-[10px] uppercase tracking-wider cursor-pointer active:scale-95"
             >
-              Add $100
+              Add ৳100
             </button>
           </div>
         </div>

@@ -125,18 +125,18 @@ body {
 }
 
 @keyframes spinGlow {
-  0% { box-shadow: 0 4px 15px rgba(246, 176, 26, 0.4), 0 0 25px rgba(246, 176, 26, 0.2); }
-  100% { box-shadow: 0 6px 28px rgba(246, 176, 26, 0.8), 0 0 40px rgba(246, 176, 26, 0.45); }
+  0% { box-shadow: 0 1px 4px rgba(246, 176, 26, 0.2), 0 0 8px rgba(246, 176, 26, 0.05); }
+  100% { box-shadow: 0 3px 12px rgba(246, 176, 26, 0.4), 0 0 18px rgba(246, 176, 26, 0.2); }
 }
 
 @keyframes goldPulse {
-  0% { filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.5)); transform: scale(1); }
-  100% { filter: drop-shadow(0 0 14px rgba(246, 176, 26, 0.95)); transform: scale(1.02); }
+  0% { filter: drop-shadow(0 0 1.5px rgba(254, 240, 138, 0.2)); transform: scale(1); }
+  100% { filter: drop-shadow(0 0 5px rgba(246, 176, 26, 0.5)); transform: scale(1.02); }
 }
 
 @keyframes scatterPulse {
-  0% { filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.6)); }
-  100% { filter: drop-shadow(0 0 16px rgba(239, 68, 68, 0.95)) drop-shadow(0 0 8px rgba(254, 240, 138, 0.8)); }
+  0% { filter: drop-shadow(0 0 1.5px rgba(239, 68, 68, 0.3)); }
+  100% { filter: drop-shadow(0 0 7px rgba(239, 68, 68, 0.6)) drop-shadow(0 0 3px rgba(254, 240, 138, 0.4)); }
 }
 
 @keyframes rot {
@@ -225,6 +225,12 @@ body {
   100% { opacity: 0; transform: scaleY(1); }
 }
 
+@keyframes bgZoomPan {
+  0% { transform: scale(1.05) translate(0, 0); }
+  50% { transform: scale(1.15) translate(-1%, -1%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+
 @keyframes winningSymbolPop {
   0% { transform: scale(1); filter: brightness(1); }
   50% { transform: scale(1.12); filter: brightness(1.2) drop-shadow(0 0 16px rgba(246, 176, 26, 0.9)); }
@@ -303,10 +309,10 @@ body {
   border: none;
   border-radius: 8px;
   box-shadow: 
-    0 6px 18px rgba(234, 179, 8, 0.65),
-    0 2px 4px rgba(0, 0, 0, 0.45),
+    0 4px 12px rgba(234, 179, 8, 0.45),
+    0 2px 4px rgba(0, 0, 0, 0.35),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
-    inset 0 -2px 4px rgba(113, 63, 18, 0.5);
+    inset 0 -2px 4px rgba(113, 63, 18, 0.4);
   position: relative;
 }
 
@@ -324,10 +330,10 @@ body {
   border: none;
   border-radius: 8px;
   box-shadow: 
-    0 6px 20px rgba(225, 29, 72, 0.75),
-    0 2px 5px rgba(0, 0, 0, 0.55),
+    0 4px 14px rgba(225, 29, 72, 0.55),
+    0 2px 5px rgba(0, 0, 0, 0.45),
     inset 0 1.5px 2px rgba(254, 240, 138, 0.95),
-    inset 0 -2px 5px rgba(76, 5, 25, 0.7);
+    inset 0 -2px 5px rgba(76, 5, 25, 0.6);
   position: relative;
 }
 

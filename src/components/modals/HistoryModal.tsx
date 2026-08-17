@@ -78,7 +78,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                       )}
                     </div>
                     <div className="text-[11px] text-[#cfd6e4] mt-0.5">
-                      Bet: <strong>${(item.bet ?? 0).toFixed(2)}</strong> | Mult: <strong>×{item.maxMultiplier ?? 1}</strong>
+                      Bet: <strong>৳{(item.bet ?? 0).toFixed(2)}</strong> | Mult: <strong>×{item.maxMultiplier ?? 1}</strong>
                     </div>
                   </div>
 
@@ -88,7 +88,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                         isWin ? 'text-[#f6d478]' : 'text-[#aab]'
                       }`}
                     >
-                      {isWin ? `+$${(item.win ?? 0).toFixed(2)}` : '$0.00'}
+                      {isWin ? `+৳${(item.win ?? 0).toFixed(2)}` : '৳0.00'}
                     </div>
                     {item.freeSpinsAwarded > 0 && (
                       <div className="text-[10px] text-yellow-300 font-bold flex items-center justify-end gap-1">

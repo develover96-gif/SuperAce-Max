@@ -43,11 +43,11 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
     <div className="relative w-full z-20 px-3 py-0.5 flex flex-col items-center select-none">
       {/* 1. Multiplier Pill Track with Deluxe Obsidian/Neon Border */}
       <div
-        className={`w-full max-w-[460px] h-10 bg-[#070e1a] rounded-full flex items-center justify-between overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.9),inset_0_2px_4px_rgba(0,0,0,0.95)] transition-all ${
+        className={`w-full max-w-[460px] h-10 bg-[#070e1a] rounded-full flex items-center justify-between overflow-hidden shadow-[0_3px_12px_rgba(0,0,0,0.85),inset_0_1.5px_3px_rgba(0,0,0,0.9)] transition-all ${
           isOverdriveTier
-            ? 'border-2 border-red-500 shadow-[0_0_22px_rgba(239,68,68,0.9)] animate-pulse'
+            ? 'border-2 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.7)] animate-pulse'
             : gameMode === 'deluxe'
-            ? 'border-2 border-[#ec4899] shadow-[0_0_12px_rgba(236,72,153,0.4)]'
+            ? 'border-2 border-[#ec4899] shadow-[0_0_8px_rgba(236,72,153,0.3)]'
             : 'border-2 border-[#a07830]'
         }`}
       >
@@ -65,8 +65,8 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
               } ${
                 isSelected
                   ? isTopTier
-                    ? 'bg-gradient-to-b from-[#ff7a7a] via-[#ef4444] to-[#7f1d1d] text-white shadow-[0_0_20px_rgba(239,68,68,1)]'
-                    : 'bg-gradient-to-b from-[#ffe9a8] via-[#f6b01a] to-[#d07810] text-[#7a1000] shadow-[0_0_15px_rgba(246,176,26,0.8)]'
+                    ? 'bg-gradient-to-b from-[#ff7a7a] via-[#ef4444] to-[#7f1d1d] text-white shadow-[0_0_12px_rgba(239,68,68,0.8)]'
+                    : 'bg-gradient-to-b from-[#ffe9a8] via-[#f6b01a] to-[#d07810] text-[#7a1000] shadow-[0_0_10px_rgba(246,176,26,0.6)]'
                   : isTopTier
                   ? 'text-[#f43f5e] bg-[#2a0814]/80'
                   : 'text-[#7a6430] bg-[#0d1726]/60'
@@ -104,7 +104,7 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ repeat: Infinity, duration: 0.8, ease: 'easeInOut' }}
-            className="px-3.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 border border-yellow-200 shadow-[0_0_15px_rgba(239,68,68,0.9)] flex items-center gap-1.5"
+            className="px-3.5 py-0.5 rounded-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 border border-yellow-200 shadow-[0_0_10px_rgba(239,68,68,0.7)] flex items-center gap-1.5"
           >
             <Zap className="w-3 h-3 text-yellow-200 animate-bounce" />
             <span className="font-['Arial'] font-black text-xs text-white uppercase tracking-wider">
@@ -117,7 +117,7 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
             animate={{ scale: [1, 1.04, 1] }}
             transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
             id="freePill"
-            className="px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#ffe9a8] via-[#f6b01a] to-[#d07810] border border-[#fffbe8] shadow-[0_0_12px_rgba(246,176,26,0.8)] flex items-center gap-1.5"
+            className="px-3.5 py-0.5 rounded-full bg-gradient-to-r from-[#ffe9a8] via-[#f6b01a] to-[#d07810] border border-[#fffbe8] shadow-[0_0_8px_rgba(246,176,26,0.6)] flex items-center gap-1.5"
           >
             <Sparkles className="w-3 h-3 text-[#7a1000] animate-spin" />
             <span className="font-['Arial'] font-black text-xs text-[#7a1000] uppercase tracking-wider">
@@ -128,7 +128,7 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
           /* Scatter collection feedback */
           <div className="flex items-center gap-1.5 text-xs text-[#f6d478] font-medium">
             <div className="w-4 h-4 rounded-full bg-red-800 border border-yellow-300 flex items-center justify-center text-[9px] font-bold text-yellow-100 shadow-[0_0_6px_#ef4444]">
-              $
+              ৳
             </div>
             <span className="text-[#ffd25e] font-bold">
               {scattersCount}/3 Scatters Landed!
@@ -138,12 +138,12 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
           /* Default SuperAce scatter hint */
           <div className="flex items-center gap-1.5 text-xs text-[#f6d478] font-medium tracking-tight">
             <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-300 border border-yellow-100 flex items-center justify-center text-[8px] font-black text-stone-950 shadow-[0_0_6px_rgba(245,158,11,0.8)]">
-              $
+              ৳
             </div>
             <span>
               {gameMode === 'deluxe'
                 ? 'Deluxe VIP Mode: Golden Jokers & Overdrive Multipliers Active'
-                : 'Collect 3 $ to receive 10 rounds'}
+                : 'Collect 3 ৳ to receive 10 rounds'}
             </span>
           </div>
         )}

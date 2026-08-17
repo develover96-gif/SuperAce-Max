@@ -29,10 +29,10 @@ export const VaultModal: React.FC<VaultModalProps> = ({
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="relative w-full max-w-md bg-gradient-to-b from-[#111827] via-[#0b0f19] to-[#04060a] border-2 border-[#ffd25e] rounded-2xl p-5 shadow-[0_0_35px_rgba(246,176,26,0.35)] text-white flex flex-col gap-4 overflow-hidden"
+        className="relative w-full max-w-md bg-gradient-to-b from-[#111827] via-[#0b0f19] to-[#04060a] border-2 border-[#ffd25e] rounded-[2px] p-5 shadow-[0_0_35px_rgba(246,176,26,0.35)] text-white flex flex-col gap-4 overflow-hidden"
       >
         {/* Top Gold Filigree Corner Accents */}
-        <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#ffd25e]" />
+        <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-[#ffd25e] rounded-none" />
         <div className="absolute top-1 right-1 w-4 h-4 border-t-2 border-r-2 border-[#ffd25e]" />
 
         {/* Modal Header */}
@@ -65,7 +65,7 @@ export const VaultModal: React.FC<VaultModalProps> = ({
             Total Locked VIP Dividend
           </div>
           <div className="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#ffe9a8] via-[#f6b01a] to-[#d07810] tracking-tight font-['Georgia'] drop-shadow-md">
-            ${(vaultData?.balance ?? 0).toFixed(2)}
+            ৳{(vaultData?.balance ?? 0).toFixed(2)}
           </div>
           <div className="text-[11px] text-amber-200/80 mt-1 flex items-center gap-1">
             <span>5% of every Big Win (≥20x) automatically accumulates here</span>
@@ -91,14 +91,14 @@ export const VaultModal: React.FC<VaultModalProps> = ({
           <button
             onClick={onHarvestDividend}
             disabled={!canHarvest}
-            className={`w-full py-3 rounded-xl font-black uppercase text-sm tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer ${
+            className={`w-full py-3 rounded-[8px] font-black uppercase text-sm tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer ${
               canHarvest
                 ? 'bg-gradient-to-r from-[#ffe9a8] via-[#f6b01a] to-[#d07810] text-[#7a1000] hover:brightness-110 active:scale-[0.98] shadow-[0_0_20px_rgba(246,176,26,0.5)]'
                 : 'bg-zinc-800 text-zinc-500 cursor-not-allowed border border-zinc-700'
             }`}
           >
             <Sparkles className="w-4 h-4" />
-            <span>Break Vault & Harvest ${(vaultData?.balance ?? 0).toFixed(2)}</span>
+            <span className="text-[12px]">Break Vault & Harvest ৳{(vaultData?.balance ?? 0).toFixed(2)}</span>
           </button>
           <p className="text-[10px] text-center text-zinc-400">
             Instant deposit to your playable bankroll with 0% wagering requirement.
@@ -113,7 +113,7 @@ export const VaultModal: React.FC<VaultModalProps> = ({
               Vault Activity Log
             </span>
             <span className="text-[10px] text-zinc-500">
-              Total Harvested: ${(vaultData?.totalHarvested ?? 0).toFixed(2)}
+              Total Harvested: ৳{(vaultData?.totalHarvested ?? 0).toFixed(2)}
             </span>
           </div>
           <div className="max-h-24 overflow-y-auto flex flex-col gap-1 text-[11px] pr-1">
@@ -132,7 +132,7 @@ export const VaultModal: React.FC<VaultModalProps> = ({
                       tx.type === 'DEPOSIT_BIG_WIN' ? 'text-emerald-400' : 'text-amber-300'
                     }`}
                   >
-                    {tx.type === 'DEPOSIT_BIG_WIN' ? '+' : '-'}${(tx.amount ?? 0).toFixed(2)}
+                    {tx.type === 'DEPOSIT_BIG_WIN' ? '+' : '-'}৳{(tx.amount ?? 0).toFixed(2)}
                   </span>
                 </div>
               ))

@@ -76,7 +76,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
             }`}
           >
             <Crown className="w-2 h-2 text-yellow-300" />
-            ★ Deluxe
+            Deluxe
           </button>
         </div>
 

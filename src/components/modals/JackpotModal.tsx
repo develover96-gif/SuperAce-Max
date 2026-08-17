@@ -64,7 +64,7 @@ export const JackpotModal: React.FC<JackpotModalProps> = ({
               GRAND PROGRESSIVE JACKPOT
             </div>
             <div className="text-2xl sm:text-3xl font-black font-mono text-yellow-300 tracking-tight text-shadow drop-shadow-[0_2px_10px_rgba(234,179,8,0.7)]">
-              ${grandJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              ৳{grandJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
             <div className="mt-1 text-[10px] text-amber-200/80 font-medium">
               2.5% of all game bets automatically seed this progressive jackpot
@@ -76,19 +76,19 @@ export const JackpotModal: React.FC<JackpotModalProps> = ({
             <div className="bg-[#0e1828] border border-sky-500/40 rounded-lg p-2">
               <span className="text-[9px] font-bold text-sky-400 tracking-wider block uppercase">MAJOR</span>
               <span className="font-mono text-xs font-black text-sky-200">
-                ${majorJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ৳{majorJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
             <div className="bg-[#0e1828] border border-emerald-500/40 rounded-lg p-2">
               <span className="text-[9px] font-bold text-emerald-400 tracking-wider block uppercase">MINOR</span>
               <span className="font-mono text-xs font-black text-emerald-200">
-                ${minorJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ৳{minorJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
             <div className="bg-[#0e1828] border border-purple-500/40 rounded-lg p-2">
               <span className="text-[9px] font-bold text-purple-400 tracking-wider block uppercase">MINI</span>
               <span className="font-mono text-xs font-black text-purple-200">
-                ${miniJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                ৳{miniJackpot.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
           </div>
@@ -99,19 +99,19 @@ export const JackpotModal: React.FC<JackpotModalProps> = ({
               <span className="flex items-center gap-1.5 text-zinc-400">
                 <Coins className="w-3.5 h-3.5 text-amber-400" /> Total Bets Placed:
               </span>
-              <span className="font-mono font-bold text-white">${totalBetsPlaced.toFixed(2)}</span>
+              <span className="font-mono font-bold text-white">৳{totalBetsPlaced.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-center text-zinc-300">
               <span className="flex items-center gap-1.5 text-zinc-400">
                 <Zap className="w-3.5 h-3.5 text-yellow-400" /> Your Jackpot Pool Contribution (2.5%):
               </span>
-              <span className="font-mono font-bold text-yellow-400">${playerContribution.toFixed(2)}</span>
+              <span className="font-mono font-bold text-yellow-400">৳{playerContribution.toFixed(2)}</span>
             </div>
             <div className="flex justify-between items-center text-zinc-300">
               <span className="flex items-center gap-1.5 text-zinc-400">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Current Bet Stake:
               </span>
-              <span className="font-mono font-bold text-white">${betAmount.toFixed(2)}</span>
+              <span className="font-mono font-bold text-white">৳{betAmount.toFixed(2)}</span>
             </div>
           </div>
 

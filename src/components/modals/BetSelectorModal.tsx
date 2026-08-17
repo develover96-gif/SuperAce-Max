@@ -65,7 +65,7 @@ export const BetSelectorModal: React.FC<BetSelectorModalProps> = ({
                   BET
                 </span>
                 <span className="font-['MStiffHei_PRC_UltraBold'] font-black text-sm tabular-nums">
-                  ${bet.toFixed(2)}
+                  ৳{bet.toFixed(2)}
                 </span>
               </button>
             );

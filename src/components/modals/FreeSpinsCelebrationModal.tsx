@@ -108,7 +108,7 @@ export const FreeSpinsSummaryModal: React.FC<FreeSpinsSummaryModalProps> = ({
             Total Win
           </span>
           <span className="font-['MStiffHei_PRC_UltraBold'] font-black text-4xl text-white mt-0.5">
-            ${safeWin.toFixed(2)}
+            ৳{safeWin.toFixed(2)}
           </span>
         </div>
 
@@ -120,7 +120,7 @@ export const FreeSpinsSummaryModal: React.FC<FreeSpinsSummaryModalProps> = ({
           {typeof bet === 'number' ? (
             <div>
               <span className="text-[#aab]">Bet: </span>
-              <strong className="text-[#f6b01a]">${bet.toFixed(2)}</strong>
+              <strong className="text-[#f6b01a]">৳{bet.toFixed(2)}</strong>
             </div>
           ) : (
             <div>

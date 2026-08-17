@@ -95,12 +95,12 @@ export const ControlBar: React.FC<ControlBarProps> = ({
   return (
     <div className="relative w-full z-20 px-2 py-0.5 flex flex-col gap-1 select-none">
       {/* 1. Win Line: Centered WIN label + value */}
-      <div className="win-line w-full flex items-center justify-center gap-6 py-0.5">
+      <div className="win-line w-full flex items-center justify-center gap-2 py-0.5">
         <span className="font-['MStiffHei_PRC_UltraBold'] font-extrabold text-[15px] text-[#f2b83c] tracking-[2px] uppercase">
           WIN
         </span>
         <span className="font-['MStiffHei_PRC_UltraBold'] font-extrabold text-[17px] text-[#ffffff] tabular-nums tracking-wide">
-          {currentWinVal.toFixed(2)}
+          ৳{currentWinVal.toFixed(2)}
         </span>
       </div>
 
@@ -139,7 +139,7 @@ export const ControlBar: React.FC<ControlBarProps> = ({
               BET
             </span>
             <span className="font-['MStiffHei_PRC_UltraBold'] font-black text-sm text-white tabular-nums leading-tight">
-              {currentBet.toFixed(2)}
+              ৳{currentBet.toFixed(2)}
             </span>
           </button>
 
@@ -160,7 +160,7 @@ export const ControlBar: React.FC<ControlBarProps> = ({
             onClick={onSpin}
             disabled={isSpinning && autoSpinsRemaining === 0 && !isFreeSpinsActive}
             aria-label="Spin"
-            className={`relative w-14 h-14 rounded-full flex items-center justify-center border-2 border-[rgba(255,231,168,0.75)] shadow-[0_4px_15px_rgba(246,176,26,0.4),0_0_25px_rgba(246,176,26,0.2)] active:scale-95 transition-all cursor-pointer ${
+            className={`relative w-14 h-14 rounded-full flex items-center justify-center border-2 border-[rgba(255,231,168,0.75)] shadow-[0_2px_10px_rgba(246,176,26,0.3),0_0_15px_rgba(246,176,26,0.15)] active:scale-95 transition-all cursor-pointer ${
               isSpinning ? 'animate-spin-pulse' : 'animate-spin-glow hover:scale-105'
             }`}
             style={{
@@ -178,7 +178,7 @@ export const ControlBar: React.FC<ControlBarProps> = ({
               {/* Arrow */}
               <svg
                 viewBox="0 0 24 24"
-                className={`w-[47px] h-[47px] text-white ${
+                className={`w-[57px] h-[57px] text-white ${
                   isSpinning ? 'animate-rot-fast' : ''
                 }`}
                 style={{ transform: 'scaleX(-1)' }}

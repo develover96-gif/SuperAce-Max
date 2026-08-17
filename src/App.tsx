@@ -23,6 +23,7 @@ import { TournamentModal } from './components/modals/TournamentModal';
 import { VIPClubModal } from './components/modals/VIPClubModal';
 import { WithdrawalInterceptModal } from './components/modals/WithdrawalInterceptModal';
 import { JackpotModal } from './components/modals/JackpotModal';
+import { DailyRewardModal } from './components/modals/DailyRewardModal';
 
 // Utilities & Engines
 import { executeSpin, generateInitialGrid } from './utils/mathEngine';
@@ -39,8 +40,8 @@ import {
 import { BUY_BONUS_COST_CLASSIC, BUY_BONUS_COST_DELUXE } from './utils/symbols';
 
 // Configurable timing parameters for game rhythm
-const MULTIPLIER_STEP_DELAY_NORMAL = 600;
-const MULTIPLIER_STEP_DELAY_TURBO = 200;
+const MULTIPLIER_STEP_DELAY_NORMAL = 1000;
+const MULTIPLIER_STEP_DELAY_TURBO = 450;
 
 export default function App() {
   // Mode Selection: 'classic' vs 'deluxe'
@@ -115,7 +116,7 @@ export default function App() {
   // RH-2: Real-Time Tournament State
   const [tournamentData, setTournamentData] = useState<TournamentData>({
     id: 'tourney_superace_deluxe',
-    title: '$50K High Roller Series',
+    title: '৳50K High Roller Series',
     prizePool: 50000,
     firstPrize: 12500,
     endsInSeconds: 14200,
@@ -150,6 +151,11 @@ export default function App() {
   const [totalBetsPlaced, setTotalBetsPlaced] = useState<number>(0);
   const [hasJackpotIncrement, setHasJackpotIncrement] = useState<boolean>(false);
   const [isJackpotOpen, setIsJackpotOpen] = useState<boolean>(false);
+
+  // Daily Reward State
+  const [isDailyRewardOpen, setIsDailyRewardOpen] = useState<boolean>(false);
+  const [dailyRewardAmount, setDailyRewardAmount] = useState<number>(0);
+  const [dailyStreak, setDailyStreak] = useState<number>(1);
 
   // Modals Visibility
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -204,6 +210,59 @@ export default function App() {
     }, 35);
     return () => clearTimeout(timeout);
   }, [currentWin, displayedWin]);
+
+  // RH-4 Init: Beginner Boost Countdown & Daily Reward Logic
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBoostData(prev => {
+        if (!prev.isActive) return prev;
+        let h = prev.hoursRemaining - 1;
+        let d = prev.daysRemaining;
+        if (h < 0) {
+          h = 23;
+          d = Math.max(0, d - 1);
+        }
+        return { ...prev, daysRemaining: d, hoursRemaining: h, isActive: d > 0 || h > 0 };
+      });
+    }, 3600000);
+
+    const checkDailyReward = () => {
+      const lastCollect = localStorage.getItem('superace_last_reward_time');
+      const now = Date.now();
+      const oneDay = 24 * 60 * 60 * 1000;
+      
+      if (!lastCollect || now - parseInt(lastCollect) > oneDay) {
+        const savedStreak = parseInt(localStorage.getItem('superace_daily_streak') || '0');
+        const lastCollectTime = parseInt(lastCollect || '0');
+        
+        let newStreak = 1;
+        if (lastCollectTime && now - lastCollectTime < oneDay * 2) {
+          newStreak = Math.min(30, savedStreak + 1);
+        }
+        
+        const baseReward = 50.0;
+        const streakBonus = Math.min(5, 1 + (newStreak - 1) * 0.1);
+        const finalAmount = baseReward * streakBonus;
+        
+        setDailyRewardAmount(finalAmount);
+        setDailyStreak(newStreak);
+        // Delay slightly for better UX on initial load
+        setTimeout(() => setIsDailyRewardOpen(true), 2000);
+      }
+    };
+
+    checkDailyReward();
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleCollectDailyReward = () => {
+    setBalance(prev => Number((prev + dailyRewardAmount).toFixed(2)));
+    localStorage.setItem('superace_last_reward_time', Date.now().toString());
+    localStorage.setItem('superace_daily_streak', dailyStreak.toString());
+    setIsDailyRewardOpen(false);
+    sound.winChime(true);
+    setVaultDepositAnimKey(Date.now());
+  };
 
   // Quick Stop Handler
   const handleQuickStop = useCallback(() => {
@@ -593,7 +652,8 @@ export default function App() {
       isAutoplayModalOpen ||
       isSettingsOpen ||
       isHistoryOpen ||
-      isPaytableOpen
+      isPaytableOpen ||
+      isDailyRewardOpen
     )
       return;
 
@@ -624,6 +684,7 @@ export default function App() {
     isVIPClubOpen,
     isVaultOpen,
     isWithdrawalInterceptOpen,
+    isDailyRewardOpen,
   ]);
 
   const handleStartFreeSpins = () => {
@@ -715,6 +776,12 @@ export default function App() {
         }}
         className="absolute inset-0 pointer-events-none -z-10 overflow-hidden select-none"
       >
+        {/* Animated Dynamic Image Layer */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-overlay filter blur-[1px] scale-105 animate-[bgZoomPan_25s_ease-in-out_infinite]"
+          style={{ backgroundImage: `url('/src/assets/images/golden_empire_bg_1786913063676.jpg')` }}
+        />
+        {/* Pattern Layer */}
         <div
           className="absolute inset-0 opacity-20"
           style={{
@@ -725,6 +792,8 @@ export default function App() {
             backgroundSize: '48px 48px',
           }}
         />
+        {/* Dark Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050b18]/85 via-[#04070d]/65 to-[#04070d]/95 shadow-[inset_0_0_150px_rgba(0,0,0,0.95)]" />
       </motion.div>
 
       {/* 1. Header Bar with Mode Switcher, Vault Button, Jackpot & Tournament Tickers */}
@@ -748,7 +817,7 @@ export default function App() {
             initial={{ y: -10, opacity: 0, scale: 0.95 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: -10, opacity: 0 }}
-            className="absolute top-16 left-1/2 -translate-x-1/2 py-1 px-4 bg-gradient-to-r from-emerald-600 to-teal-700 border border-emerald-300 rounded-full text-white text-[11px] font-black flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.8)] z-50 pointer-events-none whitespace-nowrap"
+            className="absolute top-16 left-1/2 -translate-x-1/2 py-1 px-4 bg-gradient-to-r from-emerald-600 to-teal-700 border border-emerald-300 rounded-full text-white text-[11px] font-black flex items-center justify-center gap-1.5 shadow-[0_0_8px_rgba(16,185,129,0.6)] z-50 pointer-events-none whitespace-nowrap"
           >
             <div className="w-3 h-3 text-yellow-300 animate-bounce">🔥</div>
             <span>{recentOvertakeMessage}</span>
@@ -975,8 +1044,17 @@ export default function App() {
         onAcceptBonusMatch={handleAcceptWithdrawalBonus}
         onConfirmWithdrawal={() => {
           setIsWithdrawalInterceptOpen(false);
-          alert('Withdrawal request of $500.00 processed to your linked payment method.');
+          alert('Withdrawal request of ৳500.00 processed to your linked payment method.');
         }}
+      />
+
+      {/* Daily Reward Modal */}
+      <DailyRewardModal
+        isOpen={isDailyRewardOpen}
+        onClose={() => setIsDailyRewardOpen(false)}
+        rewardAmount={dailyRewardAmount}
+        streakDays={dailyStreak}
+        onCollect={handleCollectDailyReward}
       />
     </div>
   );

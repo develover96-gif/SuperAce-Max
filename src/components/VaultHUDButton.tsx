@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles } from 'lucide-react';
 
 interface VaultHUDButtonProps {
   balance?: number;
@@ -33,10 +32,9 @@ export const VaultHUDButton: React.FC<VaultHUDButtonProps> = ({
       <div className="flex flex-col items-start leading-none pr-0.5">
         <span className="text-[8px] font-black uppercase text-[#f6d478] tracking-wider flex items-center gap-0.5">
           VAULT
-          {safeBal > 0 && <Sparkles className="w-2 h-2 text-yellow-300 animate-spin" />}
         </span>
         <span className="text-[10px] font-black font-mono text-[#fffbe8]">
-          ${safeBal.toFixed(2)}
+          ৳{safeBal.toFixed(2)}
         </span>
       </div>
 

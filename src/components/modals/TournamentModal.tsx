@@ -70,7 +70,7 @@ export const TournamentModal: React.FC<TournamentModalProps> = ({
               Total Guaranteed Prize Pool
             </div>
             <div className="text-2xl font-black text-white font-['Georgia']">
-              ${tournament.prizePool.toLocaleString()}
+              ৳{tournament.prizePool.toLocaleString()}
             </div>
           </div>
           <div className="text-right">
@@ -146,7 +146,7 @@ export const TournamentModal: React.FC<TournamentModalProps> = ({
                       {entry.score.toLocaleString()} pts
                     </span>
                     <span className="font-mono font-bold text-emerald-400 min-w-[65px]">
-                      ${entry.prize.toLocaleString()}
+                      ৳{entry.prize.toLocaleString()}
                     </span>
                   </div>
                 </div>

@@ -72,7 +72,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
             <div>
               <div className="flex items-center justify-between pb-3 border-b border-[#22304a]">
                 <div>
-                  <div className="text-[10px] font-bold text-[#f6a41c] tracking-widest uppercase">
+                  <div className="text-[14px] font-bold text-[#f6a41c] tracking-widest uppercase" style={{ fontFamily: 'Noto Sans Symbols' }}>
                     NexBet65
                   </div>
                   <div className="title-superace text-xl">
@@ -200,15 +200,15 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
             {/* Bottom Balance Top Up Action */}
             <div className="pt-3 border-t border-[#22304a] mt-3">
-              <button
+                <button
                 onClick={() => {
                   onClose();
                   onTopUpBalance();
                 }}
                 className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#ffe9a8] via-[#f6b01a] to-[#d07810] border border-[#ffd25e] text-[#7a1000] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_2px_12px_rgba(246,176,26,0.6)] cursor-pointer active:scale-95 transition-all"
               >
-                <DollarSign className="w-4 h-4 text-[#7a1000]" />
-                <span>Add Demo Credits (+$1,000)</span>
+                <DollarSign className="w-[14px] h-[14px] text-[#7a1000]" />
+                <span className="text-[11px] font-bold">Add Demo Credits (+৳1,000)</span>
               </button>
             </div>
           </motion.aside>

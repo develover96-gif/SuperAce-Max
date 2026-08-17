@@ -91,7 +91,7 @@ export const ConfettiCanvas: React.FC<ConfettiCanvasProps> = ({ active, power = 
           ctx.font = 'bold 8px Georgia';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText('$', 0, 0);
+          ctx.fillText('৳', 0, 0);
         } else {
           // Rectangular confetti
           ctx.fillStyle = p.color;

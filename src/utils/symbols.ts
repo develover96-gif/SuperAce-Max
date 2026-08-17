@@ -119,7 +119,7 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
       4: 5.0,
       5: 10.0,
     },
-    description: 'Crimson $ coin medallion. 3+ awards 10 Free Rounds with escalating multipliers!',
+    description: 'Crimson ৳ coin medallion. 3+ awards 10 Free Rounds with escalating multipliers!',
   },
 };
 

@@ -59,7 +59,7 @@ export const PreviousWinFloatOverlay: React.FC<PreviousWinFloatOverlayProps> = (
             <div className="flex items-center gap-1 text-[11px] font-['MStiffHei_PRC_UltraBold'] tracking-wider uppercase">
               <span className="text-amber-200/90 font-medium">Last Win:</span>
               <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-yellow-200 to-amber-400 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] tabular-nums text-[13px]">
-                +${(lastWin ?? 0).toFixed(2)}
+                +৳{(lastWin ?? 0).toFixed(2)}
               </span>
             </div>
 

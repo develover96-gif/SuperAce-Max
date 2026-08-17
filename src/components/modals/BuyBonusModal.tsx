@@ -121,7 +121,7 @@ export const BuyBonusModal: React.FC<BuyBonusModalProps> = ({
         <div className="w-full p-3 rounded-xl bg-[#0d1728] border border-[#1e2e48] flex flex-col gap-1 mb-3">
           <div className="flex justify-between items-center text-xs">
             <span className="text-[#aab]">Current Bet:</span>
-            <span className="font-bold text-white">${bet.toFixed(2)}</span>
+            <span className="font-bold text-white">৳{bet.toFixed(2)}</span>
           </div>
           <div className="flex justify-between items-center text-xs">
             <span className="text-[#aab]">Cost Multiplier:</span>
@@ -131,7 +131,7 @@ export const BuyBonusModal: React.FC<BuyBonusModalProps> = ({
           </div>
           <div className="pt-2 mt-1 border-t border-[#1e2e48] flex justify-between items-center text-sm font-bold">
             <span className="text-[#e8d9b0]">Feature Cost:</span>
-            <span className="text-base text-yellow-300 font-mono">${activeCost.toFixed(2)}</span>
+            <span className="text-base text-yellow-300 font-mono">৳{activeCost.toFixed(2)}</span>
           </div>
         </div>
 

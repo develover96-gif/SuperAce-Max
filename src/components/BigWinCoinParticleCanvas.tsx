@@ -152,7 +152,7 @@ export const BigWinCoinParticleCanvas: React.FC<BigWinCoinParticleCanvasProps> =
             ctx.font = `bold ${Math.floor(p.size * 0.9)}px Georgia`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('$', 0, 1);
+            ctx.fillText('৳', 0, 1);
           }
         } else if (p.type === 'star') {
           // Sparkling 4-point Diamond Star
