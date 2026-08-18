@@ -296,7 +296,7 @@ export function executeSpin(
           if (cell.isGoldenCard || cell.symbol === 'JK' || cell.isGoldenJoker) {
             // ONLY the JK symbol or a Golden Joker cell can trigger expansion
             const isJokerConv =
-              gameMode === 'deluxe' && (cell.symbol === 'JK' || cell.isGoldenJoker);
+              gameMode === 'deluxe' && (cell.symbol === 'JK' || cell.isGoldenJoker) && !cell.isExpandedWild;
             const targetSymbol: SymbolType = isJokerConv ? 'JK' : 'G';
             conversions.push({ col: c, row: r, symbol: targetSymbol });
             cell.isConverting = true;

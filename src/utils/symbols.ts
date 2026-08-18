@@ -10,9 +10,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#c9a65a',
     rankColor: '#15161c',
     payouts: {
-      3: 0.15,
-      4: 0.4,
-      5: 0.8,
+      3: 0.1,
+      4: 0.2,
+      5: 0.35,
     },
     description: 'High-paying Ace of Spades card with royal gold filigree.',
   },
@@ -25,9 +25,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#4a6edb',
     rankColor: '#0d2870',
     payouts: {
-      3: 0.1,
-      4: 0.3,
-      5: 0.6,
+      3: 0.08,
+      4: 0.15,
+      5: 0.25,
     },
     description: 'Royal King portrait with crown and royal blue mantle.',
   },
@@ -40,9 +40,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#db4a4a',
     rankColor: '#8c0c0c',
     payouts: {
-      3: 0.08,
-      4: 0.2,
-      5: 0.4,
+      3: 0.05,
+      4: 0.1,
+      5: 0.2,
     },
     description: 'Royal Queen portrait with tiara and crimson rose accents.',
   },
@@ -55,9 +55,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#2ea05a',
     rankColor: '#095427',
     payouts: {
-      3: 0.05,
-      4: 0.15,
-      5: 0.3,
+      3: 0.04,
+      4: 0.08,
+      5: 0.15,
     },
     description: 'Royal Jack knight portrait with emerald helm.',
   },
@@ -70,9 +70,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#7b8fae',
     rankColor: '#334155',
     payouts: {
-      3: 0.03,
-      4: 0.08,
-      5: 0.15,
+      3: 0.02,
+      4: 0.04,
+      5: 0.1,
     },
     description: 'Classic ornate black spade crest.',
   },
@@ -85,9 +85,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#ffe17d',
     rankColor: '#7a1000',
     payouts: {
-      3: 0.15,
-      4: 0.4,
-      5: 0.8,
+      3: 0.1,
+      4: 0.2,
+      5: 0.35,
     },
     description: 'Golden Wild coin substitute for all symbols except Scatter.',
   },
@@ -100,9 +100,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#f472b6',
     rankColor: '#831843',
     payouts: {
-      3: 0.3,
-      4: 0.8,
-      5: 1.5,
+      3: 0.2,
+      4: 0.4,
+      5: 0.6,
     },
     description: 'Deluxe Golden Joker Wild. Expands to cover the entire column as a Sticky Wild!',
   },
@@ -115,9 +115,9 @@ export const SYMBOLS: Record<SymbolType, SymbolInfo> = {
     borderStroke: '#ffd25e',
     rankColor: '#ffd25e',
     payouts: {
-      3: 0.5,
-      4: 1.5,
-      5: 5.0,
+      3: 0.2,
+      4: 1.0,
+      5: 2.5,
     },
     description: 'Crimson ৳ coin medallion. 3+ awards 10 Free Rounds with escalating multipliers!',
   },
@@ -142,9 +142,9 @@ export const REEL_WEIGHTS_DELUXE: Record<SymbolType, number> = {
   Q: 19,
   J: 24,
   S: 52,
-  G: 1.8,
-  JK: 1.2,
-  SC: 3.8,
+  G: 1.5,
+  JK: 0.5,
+  SC: 3.0,
 };
 
 // Base game multiplier ladders
@@ -152,8 +152,8 @@ export const MULTIPLIER_BASE = [1, 2, 3, 5];
 export const MULTIPLIER_FREE = [2, 4, 6, 10];
 
 // Deluxe Overdrive multiplier ladders (GR-2)
-export const MULTIPLIER_BASE_DELUXE = [1, 2, 3, 5, 15];
-export const MULTIPLIER_FREE_DELUXE = [2, 4, 6, 10, 25];
+export const MULTIPLIER_BASE_DELUXE = [1, 2, 3, 5, 10];
+export const MULTIPLIER_FREE_DELUXE = [2, 4, 6, 10, 20];
 
 // Buy Bonus Costs
 export const BUY_BONUS_COST_CLASSIC = 80;  // 80x bet

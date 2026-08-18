@@ -1,6 +1,7 @@
 import React from 'react';
 import { SymbolType } from '../types';
 import { ART, RANK } from '../utils/cardVisuals';
+import { SymbolSprite } from './SymbolSprite';
 
 interface SymbolArtworkProps {
   symbol: SymbolType;
@@ -23,178 +24,37 @@ export const SymbolArtwork: React.FC<SymbolArtworkProps> = ({
   isWinning = false,
   isConverting = false,
 }) => {
-  // 1. Golden Joker Wild (JK or isGoldenJoker or isExpandedWild)
-  if (symbol === 'JK' || isGoldenJoker || isExpandedWild) {
-    return (
-      <div className="relative w-full h-full flex items-center justify-center p-0.5 select-none overflow-hidden">
-        <svg viewBox="0 0 100 130" className="w-full h-full filter drop-shadow-[0_4px_12px_rgba(236,72,153,0.85)]">
-          <defs>
-            <radialGradient id="jkCoinBase" cx="50%" cy="40%" r="55%">
-              <stop offset="0%" stopColor="#fff1f2" />
-              <stop offset="25%" stopColor="#fbcfe8" />
-              <stop offset="55%" stopColor="#ec4899" />
-              <stop offset="85%" stopColor="#be185d" />
-              <stop offset="100%" stopColor="#500724" />
-            </radialGradient>
-            <linearGradient id="jkGoldBorder" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="25%" stopColor="#fde047" />
-              <stop offset="50%" stopColor="#eab308" />
-              <stop offset="80%" stopColor="#854d0e" />
-              <stop offset="100%" stopColor="#fef08a" />
-            </linearGradient>
-            <linearGradient id="jkBannerGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#db2777" />
-              <stop offset="50%" stopColor="#9d174d" />
-              <stop offset="100%" stopColor="#4c0519" />
-            </linearGradient>
-            <linearGradient id="jkJesterCap" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#9333ea" />
-              <stop offset="50%" stopColor="#db2777" />
-              <stop offset="100%" stopColor="#f59e0b" />
-            </linearGradient>
-            <filter id="jkGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodColor="#000000" floodOpacity="0.9" />
-            </filter>
-          </defs>
+  // Use atlas for the symbols
+  let atlasName: string = symbol;
+  
+  // Mapping logic for atlas
+  const atlasMap: Record<string, string> = {
+    'A': 'ace', 'K': 'k', 'Q': 'q', 'J': 'j', 'S': 'spades',
+    'SC': 'scatter', 'JK': 'jk', 'G': 'jk', 'H': 'hearts', 'D': 'diamonds', 'C': 'clubs'
+  };
 
-          {/* Outer Gold Rim with Diamond Studs */}
-          <circle cx="50" cy="54" r="44" fill="#500724" />
-          <circle cx="50" cy="54" r="41" fill="url(#jkCoinBase)" />
-
-          {/* Outer Gem Studs */}
-          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => (
-            <circle
-              key={angle}
-              cx="50"
-              cy="13"
-              r="2"
-              fill="#fde047"
-              transform={`rotate(${angle} 50 54)`}
-            />
-          ))}
-
-          {/* 3-Peaked Royal Jester Cap */}
-          <g filter="url(#jkGlow)">
-            {/* Left Cap Horn with Bell */}
-            <path
-              d="M 50 42 C 40 30 25 22 18 34 C 15 40 22 45 32 44 Z"
-              fill="url(#jkJesterCap)"
-            />
-            <circle cx="18" cy="34" r="3.2" fill="#fde047" />
-            <circle cx="18" cy="34" r="1" fill="#ffffff" />
-
-            {/* Right Cap Horn with Bell */}
-            <path
-              d="M 50 42 C 60 30 75 22 82 34 C 85 40 78 45 68 44 Z"
-              fill="url(#jkJesterCap)"
-            />
-            <circle cx="82" cy="34" r="3.2" fill="#fde047" />
-            <circle cx="82" cy="34" r="1" fill="#ffffff" />
-
-            {/* Center Cap Horn with Crowned Bell */}
-            <path
-              d="M 40 44 C 45 25 45 16 50 14 C 55 16 55 25 60 44 Z"
-              fill="url(#jkGoldBorder)"
-            />
-            <circle cx="50" cy="14" r="3.5" fill="#fde047" />
-            <circle cx="50" cy="14" r="1.2" fill="#ef4444" />
-
-            {/* Joker Face */}
-            <ellipse cx="50" cy="54" rx="16" ry="17" fill="#fff1f2" />
-
-            {/* Joker Royal Harlequin Eye Mask */}
-            <path
-              d="M 36 48 Q 43 45 50 49 Q 57 45 64 48 Q 66 55 60 56 Q 50 52 40 56 Q 34 55 36 48 Z"
-              fill="#831843"
-            />
-            <circle cx="43" cy="51" r="1.8" fill="#fde047" />
-            <circle cx="57" cy="51" r="1.8" fill="#fde047" />
-
-            {/* Cheek Diamond Tattoo */}
-            <polygon points="40,58 41.5,60.5 40,63 38.5,60.5" fill="#db2777" />
-            <polygon points="60,58 61.5,60.5 60,63 58.5,60.5" fill="#db2777" />
-
-            {/* Grinning Smile */}
-            <path
-              d="M 40 64 Q 50 74 60 64 Q 50 67 40 64 Z"
-              fill="#ffffff"
-            />
-            <path d="M 38 63 Q 50 76 62 63" fill="none" />
-
-            {/* Collar */}
-            <polygon
-              points="34,70 42,78 50,70 58,78 66,70 58,82 42,82"
-              fill="url(#jkGoldBorder)"
-            />
-            <circle cx="42" cy="78" r="1.5" fill="#fde047" />
-            <circle cx="58" cy="78" r="1.5" fill="#fde047" />
-          </g>
-
-          {/* 3D JOKER WILD Plaque */}
-          <g filter="url(#jkGlow)">
-            <rect x="8" y="86" width="84" height="26" rx="4" fill="#ffd25e" />
-            <rect x="10" y="88" width="80" height="22" rx="3" fill="url(#jkBannerGrad)" />
-            <circle cx="13" cy="91" r="1.2" fill="#fde047" />
-            <circle cx="87" cy="91" r="1.2" fill="#fde047" />
-            <circle cx="13" cy="107" r="1.2" fill="#fde047" />
-            <circle cx="87" cy="107" r="1.2" fill="#fde047" />
-            <text
-              x="50"
-              y="105"
-              textAnchor="middle"
-              fill="url(#jkGoldBorder)"
-              fontSize="14"
-              fontWeight="900"
-              fontFamily="Georgia, serif"
-              letterSpacing="2"
-            >
-              {isExpandedWild ? 'EXP JOKER' : 'JOKER'}
-            </text>
-          </g>
-        </svg>
-      </div>
-    );
-  }
-
-  // 2. Wild / Golden Wild (G or isWild)
-  if (symbol === 'G' || isWild) {
-    const svgCode = ART.G ? ART.G() : '';
-    return (
-      <div
-        className="relative w-full h-full flex items-center justify-center select-none overflow-hidden"
-        dangerouslySetInnerHTML={{ __html: svgCode }}
-      />
-    );
-  }
-
-  // 3. Scatter (SC)
-  if (symbol === 'SC') {
-    const svgCode = ART.SC ? ART.SC() : '';
-    return (
-      <div
-        className="relative w-full h-full flex items-center justify-center select-none overflow-hidden animate-scatter-pulse"
-        dangerouslySetInnerHTML={{ __html: svgCode }}
-      />
-    );
-  }
-
-  // 4. Standard Playing Cards (A, K, Q, J, S)
-  const rank = RANK[symbol];
-  const artFn = ART[symbol];
-  const svgHtml = artFn ? artFn() : '';
+  const targetName = atlasMap[symbol] || symbol.toLowerCase();
 
   return (
-    <div className="card relative w-full h-full flex items-center justify-center select-none overflow-hidden">
-      {rank && (
+    <div className={`relative w-full h-full flex items-center justify-center p-0.5 select-none overflow-hidden ${isWinning ? 'animate-winning-pop' : ''}`}>
+      <SymbolSprite 
+        name={targetName} 
+        width={100} 
+        height={130} 
+        className={isWinning ? 'filter drop-shadow-[0_0_15px_rgba(255,210,94,0.8)]' : ''}
+      />
+      
+      {/* Decorative rank label for cards (original design element) */}
+      {['A', 'K', 'Q', 'J'].includes(symbol) && (
         <span className="rank absolute top-1 left-1.5 font-['Arial',sans-serif] font-black text-[17px] text-[#111827] drop-shadow-[0_1px_2px_rgba(255,255,255,0.85)] z-10 pointer-events-none">
-          {rank}
+          {symbol}
         </span>
       )}
-      <div
-        className="w-full h-full flex items-center justify-center"
-        dangerouslySetInnerHTML={{ __html: svgHtml }}
-      />
+
+      {/* Golden Card Overlay Effect */}
+      {isGoldenCard && (
+        <div className="absolute inset-0 bg-yellow-400/20 mix-blend-overlay pointer-events-none border-2 border-yellow-400/50 rounded-lg animate-pulse" />
+      )}
     </div>
   );
 };

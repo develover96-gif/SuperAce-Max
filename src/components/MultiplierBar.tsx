@@ -8,6 +8,7 @@ import {
   MULTIPLIER_FREE_DELUXE,
 } from '../utils/symbols';
 import { GameMode } from '../types';
+import { MultiplierBadge } from './MultiplierBadge';
 
 interface MultiplierBarProps {
   currentMultiplier: number;
@@ -40,63 +41,37 @@ export const MultiplierBar: React.FC<MultiplierBarProps> = ({
     isOverdriveActive;
 
   return (
-    <div className="relative w-full z-20 px-3 py-0.5 flex flex-col items-center select-none">
-      {/* 1. Multiplier Pill Track with Deluxe Obsidian/Neon Border */}
+    <div className="relative w-full z-20 px-3 py-1 flex flex-col items-center select-none">
+      {/* 1. Multiplier Pill Track with Deluxe Badges */}
       <div
-        className={`w-full max-w-[460px] h-10 bg-[#070e1a] rounded-full flex items-center justify-between overflow-hidden shadow-[0_3px_12px_rgba(0,0,0,0.85),inset_0_1.5px_3px_rgba(0,0,0,0.9)] transition-all ${
+        className={`w-full max-w-[480px] h-14 bg-[#070e1a]/90 rounded-full flex items-center justify-around overflow-visible shadow-[0_4px_16px_rgba(0,0,0,0.9),inset_0_2px_4px_rgba(0,0,0,0.8)] transition-all px-2 ${
           isOverdriveTier
-            ? 'border-2 border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.7)] animate-pulse'
+            ? 'border-2 border-red-500 shadow-[0_0_20px_rgba(239,68,68,0.7)] animate-pulse'
             : gameMode === 'deluxe'
-            ? 'border-2 border-[#ec4899] shadow-[0_0_8px_rgba(236,72,153,0.3)]'
+            ? 'border-2 border-[#ec4899] shadow-[0_0_12px_rgba(236,72,153,0.3)]'
             : 'border-2 border-[#a07830]'
         }`}
       >
         {ladder.map((mult, idx) => {
           const isSelected = currentMultiplier === mult;
-          const isFirst = idx === 0;
-          const isLast = idx === ladder.length - 1;
-          const isTopTier = isLast && gameMode === 'deluxe';
-
           return (
-            <div
-              key={`mult_${mult}_${idx}`}
-              className={`relative flex-1 h-full flex items-center justify-center font-['Georgia'] font-black text-lg transition-all ${
-                idx > 0 ? 'border-l border-[#1e2e48]' : ''
-              } ${
-                isSelected
-                  ? isTopTier
-                    ? 'bg-gradient-to-b from-[#ff7a7a] via-[#ef4444] to-[#7f1d1d] text-white shadow-[0_0_12px_rgba(239,68,68,0.8)]'
-                    : 'bg-gradient-to-b from-[#ffe9a8] via-[#f6b01a] to-[#d07810] text-[#7a1000] shadow-[0_0_10px_rgba(246,176,26,0.6)]'
-                  : isTopTier
-                  ? 'text-[#f43f5e] bg-[#2a0814]/80'
-                  : 'text-[#7a6430] bg-[#0d1726]/60'
-              } ${isFirst && isSelected ? 'rounded-l-full' : ''} ${
-                isLast && isSelected ? 'rounded-r-full' : ''
-              }`}
-            >
+            <div key={`mult_${mult}_${idx}`} className="relative h-full flex items-center justify-center">
               {isSelected && (
                 <motion.div
                   layoutId="activeMultiplierGlow"
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 25,
-                  }}
-                  className="absolute inset-0 bg-white/25 animate-pulse pointer-events-none"
+                  className="absolute -inset-1 bg-yellow-400/20 blur-md rounded-full animate-pulse z-0"
                 />
               )}
-              <span className="relative z-10 tracking-tight leading-none drop-shadow-sm flex items-center gap-0.5">
-                {isTopTier && isSelected && (
-                  <Flame className="w-3.5 h-3.5 text-yellow-200 animate-bounce" />
-                )}
-                ×{mult}
-              </span>
+              <MultiplierBadge 
+                multiplier={mult} 
+                isActive={isSelected} 
+                className="z-10"
+              />
             </div>
           );
         })}
       </div>
+
 
       {/* 2. Scatter Line / Free Pill Hint Row / Overdrive Status */}
       <div className="w-full flex items-center justify-center mt-1.5 min-h-[22px]">
