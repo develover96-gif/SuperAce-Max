@@ -100,20 +100,20 @@ export const FireflyParticleCanvas: React.FC<FireflyParticleCanvasProps> = ({
       let speedScale = 1.0;
 
       if (isFS || mult >= 5) {
-        coreColor = '#fffbeb';
-        glowColor = '#ef4444'; // fiery crimson-gold in epic state
+        coreColor = '#ffffff';
+        glowColor = '#ef4444'; 
         speedScale = 2.0;
       } else if (mult >= 3) {
         coreColor = '#fef08a';
-        glowColor = '#ea580c'; // fiery amber
+        glowColor = '#ea580c'; 
         speedScale = 1.6;
       } else if (mult >= 2) {
         coreColor = '#fef08a';
-        glowColor = '#f59e0b'; // energetic gold
+        glowColor = '#f59e0b'; 
         speedScale = 1.3;
       } else {
         coreColor = '#fef9c3';
-        glowColor = '#fbbf24'; // calm warm gold
+        glowColor = '#fbbf24'; 
         speedScale = 1.0;
       }
 
@@ -138,35 +138,22 @@ export const FireflyParticleCanvas: React.FC<FireflyParticleCanvasProps> = ({
         );
         const currentRadius = f.baseRadius * (1 + Math.sin(f.phase * 1.5) * 0.25 * (intensityFactor - 0.5));
 
-        ctx.save();
+        // Use globalAlpha and simple circles instead of RadialGradient per-frame for speed
         ctx.globalAlpha = currentAlpha;
-
-        // Outer glow
-        const glowRadius = currentRadius * (4 * intensityFactor);
-        const grad = ctx.createRadialGradient(
-          f.x,
-          f.y,
-          0,
-          f.x,
-          f.y,
-          glowRadius
-        );
-        grad.addColorStop(0, coreColor);
-        grad.addColorStop(0.35, glowColor);
-        grad.addColorStop(1, 'transparent');
-
-        ctx.fillStyle = grad;
+        
+        // Draw outer glow with shadow or secondary circle (cheaper than gradient)
+        ctx.fillStyle = glowColor;
         ctx.beginPath();
+        const glowRadius = currentRadius * (3 * intensityFactor);
         ctx.arc(f.x, f.y, glowRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Inner bright core
-        ctx.fillStyle = '#ffffff';
+        ctx.globalAlpha = currentAlpha * 1.2;
+        ctx.fillStyle = coreColor;
         ctx.beginPath();
-        ctx.arc(f.x, f.y, currentRadius * 0.6, 0, Math.PI * 2);
+        ctx.arc(f.x, f.y, currentRadius * 0.8, 0, Math.PI * 2);
         ctx.fill();
-
-        ctx.restore();
       }
 
       animFrame = requestAnimationFrame(render);

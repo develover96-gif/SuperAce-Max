@@ -117,6 +117,28 @@ export const PaytableModal: React.FC<PaytableModalProps> = ({ isOpen, onClose })
             </p>
           </div>
 
+          {/* Game RTP Information */}
+          <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex flex-col gap-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Theoretical RTP</span>
+              <div className="flex gap-4">
+                <span className="text-[10px] text-zinc-400">Classic: <strong className="text-[#f6b01a]">96.55%</strong></span>
+                <span className="text-[10px] text-zinc-400">Deluxe: <strong className="text-yellow-300">97.22%</strong></span>
+              </div>
+            </div>
+          </div>
+
+          {/* Game RTP Information */}
+          <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex flex-col gap-1">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">Theoretical RTP</span>
+              <div className="flex gap-4">
+                <span className="text-[10px] text-zinc-400">Classic: <strong className="text-[#f6b01a]">96.52%</strong></span>
+                <span className="text-[10px] text-zinc-400">Deluxe: <strong className="text-yellow-300">97.18%</strong></span>
+              </div>
+            </div>
+          </div>
+
           {/* Symbol Payouts List */}
           <div className="flex flex-col gap-2">
             <span className="font-['Georgia'] font-black text-sm text-[#f6d478] uppercase">

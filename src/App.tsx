@@ -196,19 +196,32 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // Rolling Win Display Counter
+  // Rolling Win Display Counter optimized with requestAnimationFrame
   useEffect(() => {
     if (displayedWin === currentWin) return;
-    const diff = currentWin - displayedWin;
-    const step = Math.max(0.01, Math.abs(diff) / 10);
-    const timeout = setTimeout(() => {
-      if (Math.abs(diff) < 0.02) {
-        setDisplayedWin(currentWin);
-      } else {
-        setDisplayedWin((prev) => Number((prev + (diff > 0 ? step : -step)).toFixed(2)));
+    
+    let rafId: number;
+    const startTime = performance.now();
+    const startValue = displayedWin;
+    const targetValue = currentWin;
+    const duration = 600; // Total duration for rolling win increment
+
+    const tick = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Linear interpolation for smoother counter roll
+      const nextValue = Number((startValue + (targetValue - startValue) * progress).toFixed(2));
+      
+      setDisplayedWin(nextValue);
+
+      if (progress < 1) {
+        rafId = requestAnimationFrame(tick);
       }
-    }, 35);
-    return () => clearTimeout(timeout);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
   }, [currentWin, displayedWin]);
 
   // RH-4 Init: Beginner Boost Countdown & Daily Reward Logic
@@ -276,25 +289,34 @@ export default function App() {
     setSpinningColumns([false, false, false, false, false]);
   }, []);
 
-  // Interruptible timer
+  // Interruptible high-precision timer using requestAnimationFrame
   const waitDelay = useCallback((ms: number) => {
     return new Promise<void>((resolve) => {
       if (quickStopRef.current) {
         resolve();
         return;
       }
+      
+      const startTime = performance.now();
       let resolved = false;
-      const timer = setTimeout(() => {
-        if (!resolved) {
+
+      const tick = (now: number) => {
+        if (resolved) return;
+        
+        // Check if elapsed time met or quick stop triggered
+        if (now - startTime >= ms || quickStopRef.current) {
           resolved = true;
           resolve();
+        } else {
+          requestAnimationFrame(tick);
         }
-      }, ms);
+      };
+      
+      requestAnimationFrame(tick);
 
       const canceler = () => {
         if (!resolved) {
           resolved = true;
-          clearTimeout(timer);
           resolve();
         }
       };
@@ -414,10 +436,12 @@ export default function App() {
         for (let stepIdx = 0; stepIdx < spinResult.cascades.length; stepIdx++) {
           const step = spinResult.cascades[stepIdx];
 
-          // 1. Highlight winning payways
-          setCascadeDepth(stepIdx + 1);
-          setGrid(step.grid);
-          setCurrentWaysHits(step.waysHits || []);
+          // 1. Highlight winning payways (batched update)
+          requestAnimationFrame(() => {
+            setCascadeDepth(stepIdx + 1);
+            setGrid(step.grid);
+            setCurrentWaysHits(step.waysHits || []);
+          });
 
           // Subtle delay before updating the multiplier to create a better progression rhythm
           await waitDelay(isTurbo ? MULTIPLIER_STEP_DELAY_TURBO : MULTIPLIER_STEP_DELAY_NORMAL);
@@ -456,12 +480,14 @@ export default function App() {
           setCurrentWaysHits([]);
           await waitDelay(quickStopRef.current ? 70 : isTurbo ? 160 : 350);
 
-          // 3. Energy Ripple: new symbols drop into columns
+          // 3. Energy Ripple: new symbols drop into columns (batched update)
           if (step.nextGrid && step.droppedColumns && step.droppedColumns.length > 0) {
-            setGrid(step.nextGrid);
-            setActiveRippleColumns(step.droppedColumns);
-            setActiveRippleCells(step.droppedCells || []);
-            setRippleTriggerKey(Date.now() + stepIdx);
+            requestAnimationFrame(() => {
+              setGrid(step.nextGrid);
+              setActiveRippleColumns(step.droppedColumns);
+              setActiveRippleCells(step.droppedCells || []);
+              setRippleTriggerKey(Date.now() + stepIdx);
+            });
             sound.energyRipple(stepIdx + 1);
 
             const dropPause = quickStopRef.current ? 140 : isTurbo ? 280 : 680;

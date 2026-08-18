@@ -66,9 +66,9 @@ export function generateInitialGrid(
         sym !== 'SC' &&
         sym !== 'G' &&
         sym !== 'JK' &&
-        Math.random() < (gameMode === 'deluxe' ? 0.26 : 0.22);
+        Math.random() < (gameMode === 'deluxe' ? 0.22 : 0.18);
 
-      const isJoker = gameMode === 'deluxe' && (sym === 'JK' || (isGolden && Math.random() < 0.35));
+      const isJoker = gameMode === 'deluxe' && (sym === 'JK' || (isGolden && Math.random() < 0.25));
 
       columnCells.push({
         id: makeCellId(),
@@ -174,7 +174,7 @@ export function evaluateGridWays(
       const ways = colCounts.reduce((acc, count) => acc * count, 1);
       const payoutTier = Math.min(matchedCols, 5) as 3 | 4 | 5;
       const baseMultiplier = SYMBOLS[sym].payouts[payoutTier] || 0;
-      const payout = bet * baseMultiplier * (ways / 10); // Standard SuperAce ways multiplier
+      const payout = (bet / 50) * baseMultiplier * ways; // Correct 1024-ways unit-bet divisor (50 units)
 
       const cellIds: string[] = [];
       matchedCellsInCols.forEach((colCells) => {
@@ -259,10 +259,11 @@ export function executeSpin(
   const cascades: CascadeStep[] = [];
   let totalWin = scatterPayout;
   let cascadeStepIndex = 0;
-  const expandedColsSet = new Set<number>();
+  const allSpinExpandedCols = new Set<number>();
 
   // Cascade evaluation loop
   while (cascadeStepIndex < 22) {
+    const stepExpandedColsSet = new Set<number>(); // RESET expanded cols each step - non-sticky
     const { waysHits, winningCellIds } = evaluateGridWays(currentGrid, bet);
 
     if (waysHits.length === 0) {
@@ -293,14 +294,16 @@ export function executeSpin(
         if (winningCellIds.has(cell.id)) {
           cell.isWinning = true;
           if (cell.isGoldenCard || cell.symbol === 'JK' || cell.isGoldenJoker) {
+            // ONLY the JK symbol or a Golden Joker cell can trigger expansion
             const isJokerConv =
-              gameMode === 'deluxe' && (cell.symbol === 'JK' || Math.random() < 0.4);
+              gameMode === 'deluxe' && (cell.symbol === 'JK' || cell.isGoldenJoker);
             const targetSymbol: SymbolType = isJokerConv ? 'JK' : 'G';
             conversions.push({ col: c, row: r, symbol: targetSymbol });
             cell.isConverting = true;
 
             if (isJokerConv && gameMode === 'deluxe' && c >= 1 && c <= 3) {
-              expandedColsSet.add(c);
+              stepExpandedColsSet.add(c);
+              allSpinExpandedCols.add(c);
               stepExpandedCols.push(c);
             }
           }
@@ -315,22 +318,17 @@ export function executeSpin(
       winAmount: stepWin,
       comboMultiplier: currentMultiplier,
       conversions,
-      expandedJokerCols: Array.from(expandedColsSet),
+      expandedJokerCols: Array.from(stepExpandedColsSet),
       megaSymbols: activeMegaSymbols,
       isOverdrive,
     });
 
     // Cascade / Drop:
-    // 1. Golden cards in winning combo transform to Golden Wild ('G') or Golden Joker ('JK').
-    // 2. In Deluxe mode, if a column triggered Golden Joker expansion, the entire reel becomes an expanded Sticky Wild!
-    // 3. Regular winning cards are destroyed and removed.
-    // 4. Surviving cards drop to the bottom.
-    // 5. New random cards drop in from the top.
     const nextGrid: GridCell[][] = [];
 
     for (let c = 0; c < 5; c++) {
       const col = currentGrid[c];
-      const isExpandedReel = gameMode === 'deluxe' && expandedColsSet.has(c);
+      const isExpandedReel = gameMode === 'deluxe' && stepExpandedColsSet.has(c);
 
       if (isExpandedReel) {
         // Entire reel is filled with Sticky Expanded Golden Jokers
@@ -358,8 +356,9 @@ export function executeSpin(
           const cell = col[r];
           if (winningCellIds.has(cell.id)) {
             if (cell.isGoldenCard) {
+              // Standard Golden Card conversion: 25% chance for Joker, 75% for Wild G
               const isJokerConv =
-                gameMode === 'deluxe' && (cell.symbol === 'JK' || Math.random() < 0.4);
+                gameMode === 'deluxe' && Math.random() < 0.25;
               survivors.push({
                 ...cell,
                 symbol: isJokerConv ? 'JK' : 'G',
@@ -392,9 +391,9 @@ export function executeSpin(
             sym !== 'SC' &&
             sym !== 'G' &&
             sym !== 'JK' &&
-            Math.random() < (gameMode === 'deluxe' ? 0.28 : 0.22);
+            Math.random() < (gameMode === 'deluxe' ? 0.22 : 0.18);
           const isJoker =
-            gameMode === 'deluxe' && (sym === 'JK' || (isGolden && Math.random() < 0.35));
+            gameMode === 'deluxe' && (sym === 'JK' || (isGolden && Math.random() < 0.25));
 
           newCells.push({
             id: makeCellId(),
@@ -442,7 +441,7 @@ export function executeSpin(
     scattersCount,
     freeSpinsAwarded,
     isFreeSpin,
-    expandedJokerCols: Array.from(expandedColsSet),
+    expandedJokerCols: Array.from(allSpinExpandedCols),
     megaSymbols: activeMegaSymbols,
     jackpotTeaserTriggered,
     jackpotTeaserAmount,

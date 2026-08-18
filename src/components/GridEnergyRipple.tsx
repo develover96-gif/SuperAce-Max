@@ -59,21 +59,21 @@ export const GridEnergyRipple: React.FC<GridEnergyRippleProps> = ({
         timestamp,
       });
 
-      // Generate localized spark burst
+      // Generate localized spark burst (reduced count for performance)
       const colCenterX = ((col + 0.5) / 5) * 100;
-      const sparkCount = 8;
+      const sparkCount = 4; // Reduced from 8
       for (let s = 0; s < sparkCount; s++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 3 + 1.5;
+        const speed = Math.random() * 2 + 1.2;
         newSparks.push({
           id: timestamp + col * 100 + s,
           x: colCenterX,
-          y: Math.random() * 40 + 10,
+          y: Math.random() * 30 + 15,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          size: Math.random() * 3 + 2,
+          size: Math.random() * 2 + 1.5,
           color: palette[s % palette.length],
-          alpha: 1,
+          alpha: 0.8,
         });
       }
     });
@@ -153,12 +153,10 @@ export const GridEnergyRipple: React.FC<GridEnergyRippleProps> = ({
               className="absolute inset-0 w-full h-full overflow-visible"
             >
               <defs>
-                <filter id={`rippleGlow_${rip.id}`} x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="6" result="blur1" />
-                  <feGaussianBlur stdDeviation="12" result="blur2" />
+                <filter id={`rippleGlow_${rip.id}`} x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
                   <feMerge>
-                    <feMergeNode in="blur2" />
-                    <feMergeNode in="blur1" />
+                    <feMergeNode in="blur" />
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
